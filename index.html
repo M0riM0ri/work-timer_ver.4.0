@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+      <title>Work-Timer【ver.4.0】</title>
+   </head>
+   <body>
+      <!-- タイトル -->
+      <div class="title">
+        <h1 class="display-5" id="title-text">
+          <em>Work-Timer</em>
+        </h1>
+      </div>
+
+      <!--アクセスカウンタ http://www.at-counter.net/ -->
+    　  <!--「t=xxxx」の数値を変更することで画像を変更可。「&m=x」の横に「&l=y」と入力すると桁数yに設定可能-->
+      <table id=access-counter title="＠アクセスカウンター" summary="＠アクセスカウンター" border="0" cellpadding="0" cellspacing="1" style="border:#FFF 1px dotted;">
+        <tr>
+          <td>
+            <table border="0" cellspacing="1" cellpadding="1">
+              <tr>
+                <td valign="middle">
+                  <img src="http://www.at-counter.net/image/today.gif" alt="アクセスカウンター" width="30" height="12" border="0">
+                </td>
+                <td valign="middle">
+                  <script type="text/javascript">
+                    document.write('<script src="http://at-counter.net/acs.php?');
+                    document.write('r='+document.referrer+'&p='+document.location.href);
+                    document.write('&t=0019&m=1"><\/script>');
+                  </script>
+                </td>
+                <td align="middle">
+                  <img src="http://www.at-counter.net/image/yesterday.gif" alt="無料アクセスカウンター" width="50" height="12" border="0">
+                </td>
+                <td valign="middle">
+                  <script type="text/javascript">
+                    document.write('<script src="http://at-counter.net/acs.php?');
+                    document.write('r='+document.referrer+'&p='+document.location.href);
+                    document.write('&t=0019&m=2"><\/script>');
+                  </script>
+                </td>
+                <td align="middle">
+                  <img src="http://www.at-counter.net/image/total.gif" alt="無料カウンター" width="30" height="12" border="0">
+                </td>
+                <td valign="middle">
+                  <script type="text/javascript">
+                    document.write('<script src="http://at-counter.net/acs.php?');
+                    document.write('r='+document.referrer+'&p='+document.location.href);
+                    document.write('&t=0019&m=3"><\/script>');
+                  </script>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- 通知許可ボタン -->
+      <button class="btn btn-primary" id="init-button">
+          まずはここをクリックして通知を許可してください
+      </button>
+
+      <!-- 経過時間設定 -->
+      <div id="elapse-message">
+        <p class="init-message-text">
+          PC作業は60分に10〜15分の休憩を取りましょう。
+        </p>
+        <p id="elapse-message-text">
+          現在、作業開始から何分経過していますか？
+        </p>
+        <select class=inbl id="elapse-box" onchange="elapseSet()">
+           <option value="0" id="zero">0</option>
+           <option value="5">5</option>
+           <option value="10">10</option>
+           <option value="15">15</option>
+           <option value="20">20</option>
+           <option value="25">25</option>
+           <option value="30">30</option>
+           <option value="35">35</option>
+           <option value="40">40</option>
+           <option value="45">45</option>
+           <option value="50">50</option>
+           <option value="55">55</option>
+        </select>
+        <p class=inbl>分</p>
+        <button class="btn btn-primary" id="start-button">
+          クリックで業務開始
+        </button>
+        <div class="border p-1">
+          <img src='./picture/others/shisei.png' width=250px alt="画像">
+          <img src='./picture/others/resttime.png' width=350px  alt="画像">
+        </div>
+      </div>
+
+      <!-- 時間表示 -->
+      <div id="time-block">
+        <p id="time">
+          -
+        </p>
+      </div>
+
+      <!-- 遷移画像 -->
+      <img id="pic" src='./picture/chart/00分.jpg' width="450">
+
+      <!-- 休憩ボタン -->
+      <button class="btn btn-primary" id="reset-button">
+          休憩
+      </button>
+
+      <!-- 休憩中 -->
+      <div id="break">
+        <p class="break-text">
+          お疲れ様です。目を休めてストレッチをしましょう。
+        </p>
+      </div>
+      <img id="break-pic" src='./picture/fitness/fitness.PNG' width="500">
+
+      <!-- 業務再開 -->
+      <button class="btn btn-primary" id="restart-button">
+        タイマ再開
+      </button>
+
+      <!-- 更新履歴、ご要望 -->
+      <div class="links">
+        <a class="btn btn-outline-primary btn-sm" href="./html/log.html" target="_blank">
+          更新履歴
+        </a>
+        <a class="btn btn-outline-primary btn-sm" href="./html/requre.html" target="_blank">
+          ご要望
+        </a>
+      </div>
+
+      <!-- Javascript -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+      <script type="text/javascript" src="JS/script.js"></script>
+   </body>
+</html>

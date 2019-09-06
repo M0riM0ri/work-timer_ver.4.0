@@ -1,0 +1,150 @@
+body{
+  /* background-color: white; */
+  /* width: 600px; */
+  height: 600px;
+  text-align: center;
+  padding: 0 0 10px 0;
+  border: 1px solid #232323;
+  margin: 10px auto;
+  position: relative;
+}
+
+.title {
+  margin: 10px auto;
+  width: 300px;
+}
+
+#access-counter{
+  display: none;
+}
+
+#title-text{
+  display: inline;
+}
+
+.copyright{
+  text-align: right;
+  color: #aaa;
+}
+
+#init-button {
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+}
+
+#init-message {
+  display: block;
+  width: 450px;
+  text-align: center;
+  margin: 0px  auto;
+  display: none;
+}
+
+#init-message img{
+  display: block;
+  margin: 0 auto;
+}
+
+.init-message-text {
+  text-align: center;
+  margin: 20px auto 10px;
+}
+
+#init-message img{
+  margin: 20px auto;
+}
+
+#elapse-message {
+  display: block;
+  width: 450px;
+  text-align: center;
+  margin: 40px auto 0;
+  display: none;
+}
+
+#elapse-box {
+  width: 50px;
+  margin: 20px  auto;
+  display: none;
+}
+
+.inbl{
+  display: inline-block;
+  margin: 0 auto;
+}
+
+#elapse-button {
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+}
+
+#start-button {
+  width: 200px;
+  /* margin: 20px auto; */
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+}
+
+#time-block{
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  margin: 40px auto 10px;
+  display: none;
+}
+
+#pic {
+  border: 1px solid #232323;
+  margin: 10px auto;
+  display: none;
+}
+
+#reset-button {
+  width: 160px;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+  display: none;
+}
+
+#break {
+  display: block;
+  width: 400px;
+  text-align: center;
+  margin: 50px auto 0px;
+  display: none;
+}
+
+#break-pic {
+  text-align: center;
+  margin: 30px  auto;
+  display: none;
+  border: 1px solid gray;
+}
+
+#restart-button {
+  width: 160px;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.links{
+  font-size: 3rem;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  text-decoration: none;
+}
