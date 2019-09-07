@@ -1,6 +1,4 @@
 body{
-  /* background-color: white; */
-  /* width: 600px; */
   height: 600px;
   text-align: center;
   padding: 0 0 10px 0;
@@ -15,7 +13,7 @@ body{
 }
 
 #access-counter{
-  display: none;
+/*   display: none; */
 }
 
 #title-text{
