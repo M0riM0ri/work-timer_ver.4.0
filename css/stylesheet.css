@@ -13,7 +13,8 @@ body{
 }
 
 #access-counter{
-/*   display: none; */
+  float: right;
+  display: none;
 }
 
 #title-text{
