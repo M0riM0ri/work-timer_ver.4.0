@@ -71,10 +71,10 @@
         <p class="init-message-text">
           PC作業は60分に10〜15分の休憩を取りましょう。
         </p>
-        <p id="elapse-message-text">
+        <p class="elapse-message-text">
           現在、作業開始から何分経過していますか？
         </p>
-        <select class=inbl id="elapse-box" onchange="elapseSet()">
+        <select id="elapse-box" onchange="elapseSet()">
            <option value="0" id="zero">0</option>
            <option value="5">5</option>
            <option value="10">10</option>
@@ -88,7 +88,7 @@
            <option value="50">50</option>
            <option value="55">55</option>
         </select>
-        <p class=inbl>分</p>
+        <p class=elapse-box-text>分</p>
         <button class="btn btn-primary" id="start-button">
           クリックで業務開始
         </button>
@@ -106,7 +106,7 @@
       </div>
 
       <!-- 遷移画像 -->
-      <img id="pic" src='./picture/chart/00分.jpg' width="450">
+      <img id="chart-pic" src='./picture/chart/00分.jpg' width="450">
 
       <!-- 休憩ボタン -->
       <button class="btn btn-primary" id="reset-button">
@@ -131,8 +131,8 @@
         <a class="btn btn-outline-primary btn-sm" href="./html/log.html" target="_blank">
           更新履歴
         </a>
-        <a class="btn btn-outline-primary btn-sm" href="./html/requre.html" target="_blank">
-          ご要望
+        <a class="btn btn-outline-primary btn-sm" href="./contact/contact.html" target="_blank">
+          ご意見
         </a>
       </div>
 

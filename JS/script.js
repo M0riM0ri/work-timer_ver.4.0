@@ -12,13 +12,13 @@ const imgList = new Array(
 
 /* 遷移画像 */
 const imgList2 = new Array(
-  './picture/chart/00分.jpg',
-  './picture/chart/00分.jpg', './picture/chart/10分.gif',
-  './picture/chart/15分.gif', './picture/chart/20分.gif',
-  './picture/chart/25分.gif', './picture/chart/30分.gif',
-  './picture/chart/35分.gif', './picture/chart/40分.gif',
-  './picture/chart/45分.gif', './picture/chart/50分.gif',
-  './picture/chart/55分.gif', './picture/chart/60分.gif'
+  './picture/chart/00.jpg',
+  './picture/chart/00.jpg', './picture/chart/10.gif',
+  './picture/chart/15.gif', './picture/chart/20.gif',
+  './picture/chart/25.gif', './picture/chart/30.gif',
+  './picture/chart/35.gif', './picture/chart/40.gif',
+  './picture/chart/45.gif', './picture/chart/50.gif',
+  './picture/chart/55.gif', './picture/chart/60.gif'
 );
 
 /* アイコン画像 */
@@ -39,64 +39,48 @@ document.getElementById("init-button").onclick = function(){
   document.getElementById("zero" ).selected = true;
 }
 
-/* スタートボタンクリック時動作 */
+/* 開始ボタンクリック時動作 */
 document.getElementById("start-button").onclick = function(){
   minute = document.getElementById("elapse-box").value;
   //document.getElementById("mintgt").textContent = 60 - minute;
   //この計算が負の値にならないことを，プルダウンの選択肢によって保障しているので注意
   document.getElementById("elapse-message").style.display ="none";
-  // document.getElementById("elapse-box").style.display ="none";
   start = 1;
   // 初期画像表示
   imgNumber = parseInt(minute / 5);
   if(hour == 0){
-    document.getElementById("pic").src = imgList2[imgNumber];
+    document.getElementById("chart-pic").src = imgList2[imgNumber];
   }else{
-    document.getElementById("pic").src = imgList2[12];
+    document.getElementById("chart-pic").src = imgList2[12];
   }
   document.getElementById("time-block").style.display   ="block";
-  document.getElementById("pic").style.display          ="block";
+  document.getElementById("chart-pic").style.display          ="block";
   document.getElementById("reset-button").style.display ="block";
 }
 
-/* リセットボタンクリック時動作 */
+/* 休憩ボタンクリック時動作 */
 document.getElementById("reset-button").onclick = function(){
-  start = 0, second = 0, minute = 0, hour = 0;  //スタートフラグ、時間変数初期化
-  //スタートボタンテキスト変更
+  start = 0, second = 0, minute = 0, hour = 0;
+  document.getElementById("time-block").style.display     ="none";
+  document.getElementById("chart-pic").style.display            ="none";
+  document.getElementById("reset-button").style.display   ="none";
   document.getElementById("break").style.display          ="block";
   document.getElementById("break-pic").style.display      ="block";
   document.getElementById("restart-button").style.display ="block";
-  document.getElementById("time-block").style.display     ="none";
-  document.getElementById("pic").style.display            ="none";
-  document.getElementById("reset-button").style.display   ="none";
+  document.getElementById( "zero" ).selected = true;
 }
 
-/* リスタートボタンクリック時動作 */
+/* 再開ボタンクリック時動作 */
 document.getElementById("restart-button").onclick = function(){
   document.getElementById("time").innerHTML
     = hour + "時間 " + minute + "分 " + second + "秒";
-  document.getElementById("init-message").style.display   ="none";
-  document.getElementById("start-button").style.display   ="none";
   document.getElementById("restart-button").style.display ="none";
   document.getElementById("break").style.display          ="none";
   document.getElementById("break-pic").style.display      ="none";
-  document.getElementById("init-button").style.display  ="none";
   document.getElementById("elapse-message").style.display ="block";
-  document.getElementById("elapse-box").style.display ="block";
-  document.getElementById("elapse-button").style.display ="block";
-  document.getElementById( "zero" ).selected = true;
-}
-
-/* リセットボタンクリック時動作 */
-document.getElementById("reset-button").onclick = function(){
-  start = 0, second = 0, minute = 0, hour = 0;
-  document.getElementById("break").style.display          ="block";
-  document.getElementById("break-pic").style.display      ="block";
-  document.getElementById("restart-button").style.display ="block";
-  document.getElementById("time-block").style.display     ="none";
-  document.getElementById("pic").style.display            ="none";
-  document.getElementById("reset-button").style.display   ="none";
-  document.getElementById( "zero" ).selected = true;
+  document.getElementById("elapse-box").style.display ="inline-block";
+  document.getElementById("start-button").style.display ="block";
+  document.getElementById("zero" ).selected = true;
 }
 
 /* 初期時間セット */
@@ -114,9 +98,9 @@ function time(){
       // 遷移画像表示タイミング
       imgNumber = parseInt(minute / 5);
       if(hour == 0){
-        document.getElementById("pic").src = imgList2[imgNumber];
+        document.getElementById("chart-pic").src = imgList2[imgNumber];
       }else{
-        document.getElementById("pic").src = imgList2[12];
+        document.getElementById("chart-pic").src = imgList2[12];
       }
 
     }
@@ -180,29 +164,17 @@ setInterval("time()", 1000);
 
 /* 隠しコマンド */
 (function() {
-
   //入力されたキーを保存する
   var inputKey = [];
-
-  //入力されたキーと比較する隠しコマンド
-  //38 = 上
-  //40 = 下
-  //37 = 左
-  //39 = 右
-  //66 = B
-  //65 = A
+  //上上下下左右左右BA
   var konamiCommand = [38,38,40,40,37,39,37,39,66,65];
-
- //画面上のキー入力イベントリスナ
- document.addEventListener('keyup', function(e) {
-   //キー入力を配列に追加
-   inputKey.push(e.keyCode);
-
-   //キー入力が保存された配列と隠しコマンドを比較
-   if (inputKey.toString().indexOf(konamiCommand) >= 0) {
-
-     document.getElementById("access-counter").style.display="block";
-
+  //画面上のキー入力イベントリスナ
+  document.addEventListener('keyup', function(e) {
+    //キー入力を配列に追加
+    inputKey.push(e.keyCode);
+    //キー入力が保存された配列と隠しコマンドを比較
+    if (inputKey.toString().indexOf(konamiCommand) >= 0) {
+      document.getElementById("access-counter").style.display="block";
       //キー入力を初期化
       inputKey = [];
    }
