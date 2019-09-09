@@ -4,7 +4,7 @@
 #
 #  PHPメールプログラム　フリー版 最終更新日2018/07/27
 #　改造や改変は自己責任で行ってください。
-#	
+#
 #  HP: http://www.php-factory.net/
 #
 #  重要！！サイトでチェックボックスを使用する場合のみですが。。。
@@ -33,11 +33,11 @@ if (version_compare(PHP_VERSION, '5.1.0', '>=')) {//PHP5.1.0以上の場合の�
 $site_top = "http://www.php-factory.net/";
 
 //管理者のメールアドレス ※メールを受け取るメールアドレス(複数指定する場合は「,」で区切ってください 例 $to = "aa@aa.aa,bb@bb.bb";)
-$to = "xxxxxxxxxx@xxx.xxx";
+$to = "Yuki_Moritani@n.t.rd.honda.co.jp";
 
 //自動返信メールの送信元メールアドレス
 //必ず実在するメールアドレスでかつ出来る限り設置先サイトのドメインと同じドメインのメールアドレスとすることを強く推奨します
-$from = "xxxxxxxxxx@xxx.xxx";
+$from = "Yuki_Moritani@n.t.rd.honda.co.jp";
 
 //フォームのメールアドレス入力箇所のname属性の値（name="○○"　の○○部分）
 $Email = "Email";
@@ -57,7 +57,7 @@ $Referer_check_domain = "php-factory.net";
 /*セッションによるワンタイムトークン（CSRF対策、及びスパム防止）(する=1, しない=0)
 ※ただし、この機能を使う場合は↓の送信確認画面の表示が必須です。（デフォルトではON（1）になっています）
 ※【重要】ガラケーは機種によってはクッキーが使えないためガラケーの利用も想定してる場合は「0」（OFF）にして下さい（PC、スマホは問題ないです）*/
-$useToken = 1;
+$useToken = 0;
 //---------------------------　セキュリティ、スパム防止のための設定　ここまで　------------------------------------
 
 
@@ -67,7 +67,7 @@ $useToken = 1;
 // 管理者宛のメールで差出人を送信者のメールアドレスにする(する=1, しない=0)
 // する場合は、メール入力欄のname属性の値を「$Email」で指定した値にしてください。
 //メーラーなどで返信する場合に便利なので「する」がおすすめです。
-$userMail = 1;
+$userMail = 0;
 
 // Bccで送るメールアドレス(複数指定する場合は「,」で区切ってください 例 $BccMail = "aa@aa.aa,bb@bb.bb";)
 $BccMail = "";
@@ -90,7 +90,7 @@ $thanksPage = "http://xxx.xxxxxxxxx/thanks.html";
 $requireCheck = 0;
 
 /* 必須入力項目(入力フォームで指定したname属性の値を指定してください。（上記で1を設定した場合のみ）
-値はシングルクォーテーションで囲み、複数の場合はカンマで区切ってください。フォーム側と順番を合わせると良いです。 
+値はシングルクォーテーションで囲み、複数の場合はカンマで区切ってください。フォーム側と順番を合わせると良いです。
 配列の形「name="○○[]"」の場合には必ず後ろの[]を取ったものを指定して下さい。*/
 $require = array('お名前','Email');
 
@@ -166,7 +166,7 @@ $use_envelope = 0;
 
 //機種依存文字の変換
 /*たとえば㈱（かっこ株）や①（丸1）、その他特殊な記号や特殊な漢字などは変換できずに「？」と表示されます。それを回避するための機能です。
-確認画面表示時に置換処理されます。「変換前の文字」が「変換後の文字」に変換され、送信メール内でも変換された状態で送信されます。（たとえば「㈱」の場合、「（株）」に変換されます） 
+確認画面表示時に置換処理されます。「変換前の文字」が「変換後の文字」に変換され、送信メール内でも変換された状態で送信されます。（たとえば「㈱」の場合、「（株）」に変換されます）
 必要に応じて自由に追加して下さい。ただし、変換前の文字と変換後の文字の順番と数は必ず合わせる必要がありますのでご注意下さい。*/
 
 //変換前の文字
@@ -219,9 +219,9 @@ if(empty($errm)){
 		}
 	}
 }
-  
+
 if(($confirmDsp == 0 || $sendmail == 1) && $empty_flag != 1){
-	
+
 	//トークンチェック（CSRF対策）※確認画面がONの場合のみ実施
 	if($useToken == 1 && $confirmDsp == 1){
 		if(empty($_SESSION['mailform_token']) || ($_SESSION['mailform_token'] !== $_POST['mailform_token'])){
@@ -230,7 +230,7 @@ if(($confirmDsp == 0 || $sendmail == 1) && $empty_flag != 1){
 		if(isset($_SESSION['mailform_token'])) unset($_SESSION['mailform_token']);//トークン破棄
 		if(isset($_POST['mailform_token'])) unset($_POST['mailform_token']);//トークン破棄
 	}
-	
+
 	//差出人に届くメールをセット
 	if($remail == 1) {
 		$userBody = mailToUser($_POST,$dsp_name,$remail_text,$mailFooterDsp,$mailSignature,$encode);
@@ -241,7 +241,7 @@ if(($confirmDsp == 0 || $sendmail == 1) && $empty_flag != 1){
 	$adminBody = mailToAdmin($_POST,$subject,$mailFooterDsp,$mailSignature,$encode,$confirmDsp);
 	$header = adminHeader($userMail,$post_mail,$BccMail,$to);
 	$subject = "=?iso-2022-jp?B?".base64_encode(mb_convert_encoding($subject,"JIS",$encode))."?=";
-	
+
 	//-fオプションによるエンベロープFrom（Return-Path）の設定(safe_modeがOFFの場合かつ上記設定がONの場合のみ実施)
 	if($use_envelope == 0){
 		mail($to,$subject,$adminBody,$header);
@@ -251,7 +251,7 @@ if(($confirmDsp == 0 || $sendmail == 1) && $empty_flag != 1){
 		if($remail == 1 && !empty($post_mail)) mail($post_mail,$re_subject,$userBody,$reheader,'-f'.$from);
 	}
 }
-else if($confirmDsp == 1){ 
+else if($confirmDsp == 1){
 
 /*　▼▼▼送信確認画面のレイアウト※編集可　オリジナルのデザインも適用可能▼▼▼　*/
 ?>
@@ -346,7 +346,7 @@ input[type="submit"], input[type="reset"], input[type="button"] {
 /* ▲▲▲送信確認画面のレイアウト　※オリジナルのデザインも適用可能▲▲▲　*/
 }
 
-if(($jumpPage == 0 && $sendmail == 1) || ($jumpPage == 0 && ($confirmDsp == 0 && $sendmail == 0))) { 
+if(($jumpPage == 0 && $sendmail == 1) || ($jumpPage == 0 && ($confirmDsp == 0 && $sendmail == 0))) {
 
 /* ▼▼▼送信完了画面のレイアウト　編集可 ※送信完了後に指定のページに移動しない場合のみ表示▼▼▼　*/
 ?>
@@ -376,15 +376,15 @@ if(($jumpPage == 0 && $sendmail == 1) || ($jumpPage == 0 && ($confirmDsp == 0 &&
 <!--  CV率を計測する場合ここにAnalyticsコードを貼り付け -->
 </body>
 </html>
-<?php 
+<?php
 /* ▲▲▲送信完了画面のレイアウト 編集可 ※送信完了後に指定のページに移動しない場合のみ表示▲▲▲　*/
   }
 }
 //確認画面無しの場合の表示、指定のページに移動する設定の場合、エラーチェックで問題が無ければ指定ページヘリダイレクト
-else if(($jumpPage == 1 && $sendmail == 1) || $confirmDsp == 0) { 
+else if(($jumpPage == 1 && $sendmail == 1) || $confirmDsp == 0) {
 	if($empty_flag == 1){ ?>
 <div align="center"><h4>入力にエラーがあります。下記をご確認の上「戻る」ボタンにて修正をお願い致します。</h4><div style="color:red"><?php echo $errm; ?></div><br /><br /><input type="button" value=" 前画面に戻る " onClick="history.back()"></div>
-<?php 
+<?php
 	}else{ header("Location: ".$thanksPage); }
 }
 
@@ -426,7 +426,7 @@ function postToMail($arr){
 	foreach($arr as $key => $val) {
 		$out = '';
 		if(is_array($val)){
-			foreach($val as $key02 => $item){ 
+			foreach($val as $key02 => $item){
 				//連結項目の処理
 				if(is_array($item)){
 					$out .= connect2val($item);
@@ -435,10 +435,10 @@ function postToMail($arr){
 				}
 			}
 			$out = rtrim($out,', ');
-			
+
 		}else{ $out = $val; }//チェックボックス（配列）追記ここまで
 		if(get_magic_quotes_gpc()) { $out = stripslashes($out); }
-		
+
 		//全角→半角変換
 		if($hankaku == 1){
 			$out = zenkaku2hankaku($key,$out,$hankaku_array);
@@ -456,7 +456,7 @@ function confirmOutput($arr){
 	foreach($arr as $key => $val) {
 		$out = '';
 		if(is_array($val)){
-			foreach($val as $key02 => $item){ 
+			foreach($val as $key02 => $item){
 				//連結項目の処理
 				if(is_array($item)){
 					$out .= connect2val($item);
@@ -465,18 +465,18 @@ function confirmOutput($arr){
 				}
 			}
 			$out = rtrim($out,', ');
-			
+
 		}else{ $out = $val; }//チェックボックス（配列）追記ここまで
 		if(get_magic_quotes_gpc()) { $out = stripslashes($out); }
 		$out = nl2br(h($out));//※追記 改行コードを<br>タグに変換
 		$key = h($key);
 		$out = str_replace($replaceStr['before'], $replaceStr['after'], $out);//機種依存文字の置換処理
-		
+
 		//全角→半角変換
 		if($hankaku == 1){
 			$out = zenkaku2hankaku($key,$out,$hankaku_array);
 		}
-		
+
 		$html .= "<tr><th>".$key."</th><td>".$out;
 		$html .= '<input type="hidden" name="'.$key.'" value="'.str_replace(array("<br />","<br>"),"",$out).'" />';
 		$html .= "</td></tr>\n";
@@ -487,7 +487,7 @@ function confirmOutput($arr){
 		$_SESSION['mailform_token'] = $token;
 		$html .= '<input type="hidden" name="mailform_token" value="'.$token.'" />';
 	}
-	
+
 	return $html;
 }
 
@@ -588,7 +588,7 @@ function requireCheck($require){
 		$existsFalg = '';
 		foreach($_POST as $key => $val) {
 			if($key == $requireVal) {
-				
+
 				//連結指定の項目（配列）のための必須チェック
 				if(is_array($val)){
 					$connectEmpty = 0;
@@ -600,7 +600,7 @@ function requireCheck($require){
 								}
 							}
 						}
-						
+
 					}
 					if($connectEmpty > 0){
 						$res['errm'] .= "<p class=\"error_messe\">【".h($key)."】は必須項目です。</p>\n";
@@ -612,18 +612,18 @@ function requireCheck($require){
 					$res['errm'] .= "<p class=\"error_messe\">【".h($key)."】は必須項目です。</p>\n";
 					$res['empty_flag'] = 1;
 				}
-				
+
 				$existsFalg = 1;
 				break;
 			}
-			
+
 		}
 		if($existsFalg != 1){
 				$res['errm'] .= "<p class=\"error_messe\">【".$requireVal."】が未選択です。</p>\n";
 				$res['empty_flag'] = 1;
 		}
 	}
-	
+
 	return $res;
 }
 //リファラチェック
