@@ -83,7 +83,7 @@ document.getElementById("restart-button").onclick = function () {
   document.getElementById("elapse-box").style.display = "inline-block";
   document.getElementById("start-button").style.display = "block";
   document.getElementById("zero").selected = true;
-  document.getElementById("back").style.background = "#FFFCDB";
+  document.getElementById("back").style.background = "#F2F2F2";
 }
 
 /* 初期時間セット */
