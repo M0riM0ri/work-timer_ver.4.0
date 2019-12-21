@@ -5,6 +5,9 @@ body{
   border: 1px solid #232323;
   margin: 10px auto;
   position: relative;
+  transition: 2s;
+  color: #333;
+  background: #F2F2F2;
 }
 
 .title {
@@ -112,28 +115,30 @@ body{
   font-size: 3rem;
   position: absolute;
   left: 50%;
-  bottom: 10px;
+  bottom: 0px;
   transform: translateX(-50%);
   text-decoration: none;
 }
 
-#log{
+.log{
   width: 800px;
   margin: 0 auto;
 }
 
-#log .h3{
-  margin: 20px auto;
+.log h1{
+  margin: 0 auto;
 }
 
-#log .h5{
+.log p{
   text-align: left;
+  margin: 0;
 }
 
-#log p{
-  text-align: left;
+.log .change{
+  margin-bottom: 10px;
 }
 
 .underline{
   text-decoration: underline;
 }
+
