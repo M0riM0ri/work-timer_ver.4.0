@@ -57,6 +57,7 @@ document.getElementById("start-button").onclick = function () {
   document.getElementById("chart-pic").style.display = "block";
   document.getElementById("reset-button").style.display = "block";
   document.getElementById("back").style.background = "#FFFCDB";
+  document.title = "作業中 ～Work-Timer～";
 }
 
 /* 休憩ボタンクリック時動作 */
@@ -70,6 +71,7 @@ document.getElementById("reset-button").onclick = function () {
   document.getElementById("restart-button").style.display = "block";
   document.getElementById("zero").selected = true;
   document.getElementById("back").style.background = "#BEDFC2";
+  document.title = "休憩中 ～Work-Timer～";
 }
 
 /* 再開ボタンクリック時動作 */
@@ -83,7 +85,6 @@ document.getElementById("restart-button").onclick = function () {
   document.getElementById("elapse-box").style.display = "inline-block";
   document.getElementById("start-button").style.display = "block";
   document.getElementById("zero").selected = true;
-  document.getElementById("back").style.background = "#F2F2F2";
 }
 
 /* 初期時間セット */
